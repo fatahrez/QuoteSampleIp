@@ -14,6 +14,8 @@ export class QuoteComponent implements OnInit {
     new Quote('Oprah Winfrey', 'Abdulfatah', 'Where there is no struggle, there is no strength.', 0, 0, new Date(2020, 4, 6))
   ];
 
+  constructor() { }
+
   toggleDetails(index) {
     this.quotes[index].showQuote = !this.quotes[index].showQuote;
   }
@@ -35,7 +37,13 @@ export class QuoteComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  addNewQuote(author: string, submitter: string, theQuote: string, date: Date) {
+    const quote: Quote = new Quote(author, submitter, theQuote, 0, 0, new Date(Date.now()));
+  }
+
+  get addNewQuoteFunc() {
+    return this.addNewQuote.bind(this);
+  }
 
   ngOnInit() {
   }
