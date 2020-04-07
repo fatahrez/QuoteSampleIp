@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
+      <app-quote-form></app-quote-form>
+    </div>
+    <div class="col-md-6">
       <div *ngFor="let quote of quotes; let i = index;">
         <h2>{{quote.author}}</h2>
         <button class="btn btn-outline-primary" (click)="toggleDetails(i)">Show Quote</button>
