@@ -14,7 +14,9 @@ export class QuoteComponent implements OnInit {
     new Quote('Oprah Winfrey', 'Abdulfatah', 'Where there is no struggle, there is no strength.', 0, 0, new Date(2020, 4, 6))
   ];
 
-
+  toggleDetails(index) {
+    this.quotes[index].showQuote = !this.quotes[index].showQuote;
+  }
 
   constructor() { }
 

@@ -1,1 +1,10 @@
-<p>quote works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngFor="let quote of quotes; let i = index;">
+        <h2>{{quote.author}}</h2>
+        <button class="btn btn-outline-primary">Show Quote</button>
+      </div>
+    </div>
+  </div>
+</div>
