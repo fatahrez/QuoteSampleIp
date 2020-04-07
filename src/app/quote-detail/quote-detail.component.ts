@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quote} from '../quote';
-import {isBoolean} from 'util';
 
 @Component({
   selector: 'app-quote-detail',

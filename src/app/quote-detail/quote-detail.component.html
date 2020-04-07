@@ -1,1 +1,21 @@
-<p>quote-detail works!</p>
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">{{quote.submitter}}</div>
+  </div>
+
+  <div class="card-body">
+    {{quote.theQuote}}
+  </div>
+  <div class="card-group">
+    <button class="btn btn-primary" (click)="increaseVote(true)">upvote</button>
+
+    <button class="btn btn-dark" (click)="increaseVote(true)">downvote</button>
+  </div>
+
+  <div class="row">
+    <p class="col-md-6">{{quote.upVote}}</p>
+    <p class="col-md-3">{{quote.downVote}}</p>
+    <div class="col-md-3"></div>
+  </div>
+  <button class="btn btn-warning" (click)="deleteQuote(true)">Delete</button>
+</div>
