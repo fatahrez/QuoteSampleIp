@@ -17,6 +17,6 @@
     <p class="col-md-3">{{quote.downVote}}</p>
     <div class="col-md-3"></div>
   </div>
-  <p>Posted {{ quote.date|timeCount }}</p>
+  <p>Posted time: {{ quote.date|timeCount }}</p>
   <button class="btn btn-warning" (click)="deleteQuote(true)">Delete</button>
 </div>

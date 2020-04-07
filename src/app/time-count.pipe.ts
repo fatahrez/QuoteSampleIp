@@ -1,23 +1,29 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {ChangeDetectorRef, Pipe } from '@angular/core';
+import {AsyncPipe} from '@angular/common';
+import { parse, distanceInWordsToNow } from 'date-fns';
+import {Observable, timer} from 'rxjs';
+import {distinctUntilChanged, map, tap} from 'rxjs/operators';
 
 @Pipe({
   name: 'timeCount',
-  pure: true
+  pure: false
 })
-export class TimeCountPipe implements PipeTransform {
+export class TimeCountPipe extends AsyncPipe {
+  private time: Date;
+  private formatted$: Observable<string>;
 
-  transform(value: any, args?: any): any {
-    const today: Date = new Date();
-    const todayWithNoTime: any = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    const dateDifference = Math.abs(value - todayWithNoTime);
-    const secondsInDay = 86400;
-    const dateDifferenceSeconds = dateDifference * 0.001;
-    const dateCounter = dateDifferenceSeconds / secondsInDay;
+  constructor(private cd: ChangeDetectorRef) {
+    super(cd);
 
-    if (dateCounter >= 1 && value > todayWithNoTime){
-      return dateCounter;
-    } else {
-      return 0;
-    }
+    this.formatted$ = timer(0, 1000).pipe(
+      map(() => distanceInWordsToNow(this.time, { addSuffix: true, includeSeconds: true })),
+      distinctUntilChanged(),
+      tap(time => console.log('new time:', time)),
+    );
+  }
+
+  public transform(value: any): any {
+    this.time = parse(value);
+    return super.transform(this.formatted$);
   }
 }
