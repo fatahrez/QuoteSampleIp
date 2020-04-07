@@ -39,6 +39,7 @@ export class QuoteComponent implements OnInit {
 
   addNewQuote(author: string, submitter: string, theQuote: string, date: Date) {
     const quote: Quote = new Quote(author, submitter, theQuote, 0, 0, new Date(Date.now()));
+    this.quotes.push(quote);
   }
 
   get addNewQuoteFunc() {
