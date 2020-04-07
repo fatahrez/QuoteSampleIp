@@ -3,7 +3,8 @@
     <div class="col-md-6">
       <div *ngFor="let quote of quotes; let i = index;">
         <h2>{{quote.author}}</h2>
-        <button class="btn btn-outline-primary">Show Quote</button>
+        <button class="btn btn-outline-primary" (click)="toggleDetails(i)">Show Quote</button>
+        <app-quote-detail *ngIf='quote.showQuote' [quote]='quote' (isDelete)='quoteDelete($event,i)' (isVote)="voteIncrease($event, i)"></app-quote-detail>
       </div>
     </div>
   </div>
