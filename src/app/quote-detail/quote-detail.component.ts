@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {Quote} from '../quote';
 
 @Component({
@@ -21,7 +21,6 @@ export class QuoteDetailComponent implements OnInit {
   increaseVote(votes: boolean) {
     this.isVote.emit(votes);
   }
-
   ngOnInit() {
   }
 

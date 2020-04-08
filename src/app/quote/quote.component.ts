@@ -9,10 +9,7 @@ import DateTimeFormat = Intl.DateTimeFormat;
 })
 export class QuoteComponent implements OnInit {
 
-  quotes = [
-    new Quote('Martin Luther King Jr.', 'Abdulfatah', 'If you cant fly then run, if you cant run then walk, if you cant walk then crawl, but whatever you do, you have to keep moving forward.', 0, 0, new Date(2020, 4, 6)),
-    new Quote('Oprah Winfrey', 'Abdulfatah', 'Where there is no struggle, there is no strength.', 0, 0, new Date(2020, 4, 6))
-  ];
+  quotes:Quote[] = [];
 
   constructor() { }
 
@@ -38,13 +35,38 @@ export class QuoteComponent implements OnInit {
   }
 
   addNewQuote(author: string, submitter: string, theQuote: string, date: Date) {
-    const quote: Quote = new Quote(author, submitter, theQuote, 0, 0, new Date(Date.now()));
+    const id = this.quotes.length
+    const quote: Quote = new Quote(id+1, author, submitter, theQuote, 0, 0, new Date(Date.now()), false);
     this.quotes.push(quote);
+    this.getHighestQuote(true)
   }
 
   get addNewQuoteFunc() {
     return this.addNewQuote.bind(this);
   }
+
+  getHighestQuote(changed:boolean):void{
+    let highest:any[]=[0,0]
+    if(changed){
+      for(let quote of this.quotes){
+        if(quote.upVote > highest[1]){
+          highest[1]=quote.upVote;
+          highest[0]=quote;
+        }
+      }
+    }
+    this.highlightExcept(highest[0]);
+  }
+   highlightExcept(except:Quote){
+      for(let quote of this.quotes){
+        if(except.id!=quote.id){
+          quote.highest=false;
+       }
+       else{
+          except.highest=true;
+       }
+      }
+   }
 
   ngOnInit() {
   }
